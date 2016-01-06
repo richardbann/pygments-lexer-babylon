@@ -1,4 +1,4 @@
-from lexer import BabylonLexer  # noqa
+from .lexer import BabylonLexer  # noqa
 
 
 __all__ = ['BabylonLexer']
