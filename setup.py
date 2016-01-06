@@ -12,6 +12,7 @@ def files():
             _file = os.path.join(root, f)
             relpath = os.path.relpath(_file, PKGDIR)
             ret.append(relpath)
+    ret.append('runbabylon.js')
     return ret
 
 
