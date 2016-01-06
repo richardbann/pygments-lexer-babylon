@@ -10,5 +10,5 @@ setup(
     ],
     license='MIT',
     packages=['pygmentslexerbabylon'],
-    package_data={'': ['*']}
+    package_data={'': ['node_modules/*']}
 )
