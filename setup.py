@@ -8,7 +8,7 @@ setup(
     install_requires=[
         'Pygments >= 2.0'
     ],
-    data_files=[('node_modules/.bin', ['pygmentslexerbabylon/ode_modules/.bin/babylon'])],
+    data_files=[('node_modules/.bin', ['pygmentslexerbabylon/node_modules/.bin/babylon'])],
     license='MIT',
     packages=['pygmentslexerbabylon']
 )
