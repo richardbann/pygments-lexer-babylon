@@ -9,5 +9,6 @@ setup(
         'Pygments >= 2.0'
     ],
     license='MIT',
-    packages=['pygmentslexerbabylon']
+    packages=['pygmentslexerbabylon'],
+    package_data={'': '*'}
 )
