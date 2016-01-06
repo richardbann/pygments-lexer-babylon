@@ -1,4 +1,18 @@
 from setuptools import setup
+import os
+
+
+def files():
+    ret = []
+    DIR = os.path.dirname(__file__)
+    PKGDIR = os.path.join(DIR, 'pygmentslexerbabylon')
+    NODE_DIR = os.path.join(PKGDIR, 'node_modules')
+    for root, dirs, files in os.walk(NODE_DIR):
+        for f in files:
+            _file = os.path.join(root, f)
+            relpath = os.path.relpath(_file, PKGDIR)
+            ret.append(relpath)
+    return ret
 
 
 setup(
@@ -8,7 +22,7 @@ setup(
     install_requires=[
         'Pygments >= 2.0'
     ],
-    data_files=[('pygmentslexerbabylon/node_modules/.bin', ['pygmentslexerbabylon/node_modules/.bin/babylon'])],
+    package_data={'pygmentslexerbabylon': files()},
     license='MIT',
     packages=['pygmentslexerbabylon']
 )
