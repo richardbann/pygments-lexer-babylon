@@ -1,1 +1,1 @@
-recursive-include node_modules *
+recursive-include pygmentslexerbabylon/node_modules *
