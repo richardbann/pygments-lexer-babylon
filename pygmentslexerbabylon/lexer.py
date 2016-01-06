@@ -93,7 +93,6 @@ class BabylonLexer(Lexer):
             out = check_output(CMD, input=inp, stderr=STDOUT)
         except CalledProcessError as e:
             err = e.output.decode('utf-8')
-            print(err)
             m = re.search(r'\((\d+):(\d+)\)', err)
             if m:
                 row, col = m.groups()
