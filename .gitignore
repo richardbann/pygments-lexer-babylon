@@ -1,4 +1,2 @@
 *.pyc
-docker-compose.yml
-docker_run.py
 __pycache__

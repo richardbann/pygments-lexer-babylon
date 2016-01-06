@@ -1,36 +1,57 @@
-from subprocess import check_output, STDOUT, CalledProcessError
+# from subprocess import check_output, STDOUT, CalledProcessError
+import subprocess
 import os
 import json
 import re
 
-from pygments.lexer import Lexer
+from pygments.lexer import Lexer, bygroups, using
+from pygments.lexers.html import HtmlLexer
 from pygments.token import (Text, Comment, String, Keyword, Name,
                             Number, Punctuation, Error, Operator)
 
 
 JSFILE = os.path.join(os.path.dirname(__file__), 'runbabylon.js')
 CMD = ['node', JSFILE]
+
 RESERVED_WORDS = (
     'break', 'case', 'catch', 'continue', 'debugger', 'default', 'do', 'else',
-    'finally', 'for', 'function', 'if', 'return', 'switch', 'throw', 'try',
-    'var', 'let', 'const', 'while', 'with', 'new', 'this', 'super', 'class',
+    'finally', 'for', 'if', 'return', 'switch', 'throw', 'try',
+    'while', 'with', 'new', 'this', 'super',
     'extends', 'export', 'import', 'yield', 'null', 'true', 'false', 'in',
     'instanceof', 'typeof', 'void', 'delete'
 )
+
+RESERVED_WORDS_DECL = (
+    'var', 'let', 'const', 'function', 'class'
+)
+
 OPERATORS = (
     '=', '_=', '++/--', 'prefix', '||', '&&', '|', '^', '&', '==/!=', '</>',
-    '<</>>', '+/-', '%', '*', '/', '**'
+    '<</>>', '+/-', '%', '*', '/', '**', '=>'
 )
+
 PUNCTUATORS = (
-    '[', ']', '{', '}', '(', ')', ',', ';', ':', '::', '.', '?', '=>',
+    '[', ']', '{', '}', '(', ')', ',', ';', ':', '::', '.', '?',
     'template', '...', '`', '${', '@'
+)
+
+CONST_NAMES = (
+    'NaN', 'Infinity', 'undefined'
+)
+
+BUILTIN_NAMES = (
+    'Array', 'Boolean', 'Date', 'Error', 'Function', 'Math', 'Number',
+    'Object', 'Packages', 'RegExp', 'String', 'Promise', 'Proxy', 'decodeURI',
+    'decodeURIComponent', 'encodeURI', 'encodeURIComponent', 'Error', 'eval',
+    'isFinite', 'isNaN', 'isSafeInteger', 'parseFloat', 'parseInt', 'document',
+    'window'
 )
 
 
 def gettokentype(text, tokens, i):
     token = tokens[i]
     start, end, ttype = tuple(token)
-    # value = text[start:end]
+    value = text[start:end]
     prevtype = tokens[i - 1][2] if i > 0 else None
     nexttype = tokens[i + 1][2] if i < len(tokens) - 1 else None
 
@@ -46,6 +67,8 @@ def gettokentype(text, tokens, i):
         return Number
 
     # reserved words
+    elif ttype in RESERVED_WORDS_DECL:
+        return Keyword.Declaration
     elif ttype in RESERVED_WORDS:
         return Keyword
 
@@ -79,6 +102,11 @@ def gettokentype(text, tokens, i):
         return Punctuation
 
     elif ttype == 'name':
+        if value in CONST_NAMES:
+            return Name.Constant
+        elif value in BUILTIN_NAMES:
+            return Name.Builtin
+
         return Name.Other
 
     return Text
@@ -88,11 +116,18 @@ class BabylonLexer(Lexer):
     name = 'Babylon'
 
     def get_tokens_unprocessed(self, text):
-        inp = bytes(text, encoding='utf-8')
-        try:
-            out = check_output(CMD, input=inp, stderr=STDOUT)
-        except CalledProcessError as e:
-            err = e.output.decode('utf-8')
+        # inp = bytes(text, encoding='utf-8')
+        inp = text.encode('utf-8')
+
+        # out = check_output(CMD, input=inp, stderr=STDOUT)
+        sp = subprocess.Popen(CMD,
+                              stdin=subprocess.PIPE,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE)
+
+        out, err = sp.communicate(inp)
+        if err:
+            err = err.decode('utf-8')
             m = re.search(r'\((\d+):(\d+)\)', err)
             if m:
                 row, col = m.groups()
@@ -122,3 +157,15 @@ class BabylonLexer(Lexer):
 
             if position < len(text):
                 yield (position, Text, text[position:])
+
+
+class BabylonHtmlLexer(HtmlLexer):
+    name = 'BabylonHTML'
+    tokens = {
+        'script-content': [
+            (r'(<)(\s*)(/)(\s*)(script)(\s*)(>)',
+             bygroups(Punctuation, Text, Punctuation, Text, Name.Tag, Text,
+                      Punctuation), '#pop'),
+            (r'.+?(?=<\s*/\s*script\s*>)', using(BabylonLexer)),
+        ]
+    }

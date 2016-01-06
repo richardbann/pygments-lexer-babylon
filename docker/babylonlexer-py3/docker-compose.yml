@@ -1,0 +1,8 @@
+babylonlexer:
+    hostname: babylonlexer
+    image: rbann/babylonlexer-py3
+    volumes:
+        - "../run.py:/opt/config/run.py"
+        - "../..:/pygments-lexer-babylon"
+    environment:
+        PYTHONUNBUFFERED: 1
