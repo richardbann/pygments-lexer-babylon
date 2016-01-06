@@ -11,7 +11,7 @@ from pygments.token import (Text, Comment, String, Keyword, Name,
 
 
 JSFILE = os.path.join(os.path.dirname(__file__), 'runbabylon.js')
-CMD = ['node', JSFILE]
+CMD = ['nodejs', JSFILE]
 
 RESERVED_WORDS = (
     'break', 'case', 'catch', 'continue', 'debugger', 'default', 'do', 'else',

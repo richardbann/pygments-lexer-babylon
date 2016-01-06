@@ -1,6 +1,6 @@
 // árvíztűrő tükörfúrógép
 
-var x = 123;
+var x = 123456;
 
 c1 = <Component prop={123} othercomp=<Other/> val={x}/>
 
