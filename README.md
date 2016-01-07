@@ -60,11 +60,12 @@ from pygmentslexerbabylon import register
 register()
 ```
 
-If you use the `pygmentize` command provided by `Pygments`, you are on your own for now :disappointed:.
-Maybe some time in the future (if this whole stuff is needed anyway).
+If you use the `pygmentize` command, be very careful: this package overwrites
+the original script and uses the new lexers. If you do not like this behavior,
+send an issue and we can figure out a better way.
 
 ## Gotchas
 - It is a bit slower than `Pygments`...
 - May fail for really large files (0.5 MB worked for me though)
 - Produces slightly different result than the original `Pygments` lexer
-- `pygmentize` can not use it
+- Overwrites the `pygmentize` command

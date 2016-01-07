@@ -1,5 +1,5 @@
 babylonlexer:
-    hostname: babylonlexer
+    hostname: babylonlexer-py3
     image: rbann/babylonlexer-py3
     command: shell
     volumes:

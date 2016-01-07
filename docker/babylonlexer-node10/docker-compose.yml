@@ -1,5 +1,5 @@
 babylonlexer:
-    hostname: babylonlexer
+    hostname: babylonlexer-node10
     image: rbann/babylonlexer-node10
     command: shell
     volumes:

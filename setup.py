@@ -20,10 +20,26 @@ setup(
     name='pygments-lexer-babylon',
     description='A javascript lexer for Pygments that uses the babylon parser',
     version='0.9.0',
+    url='https://github.com/rbann/pygments-lexer-babylon',
+    author='Richard Bann',
+    author_email='richard.bann@vertis.com',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Plugins',
+        'Intended Audience :: Developers',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3'
+    ],
+    keywords='pygments highlight jsx node babylon',
     install_requires=[
         'Pygments >= 2.0'
     ],
     package_data={'pygmentslexerbabylon': files()},
     license='MIT',
-    packages=['pygmentslexerbabylon']
+    packages=['pygmentslexerbabylon'],
+    entry_points={
+        'console_scripts': [
+            'pygmentize=pygmentslexerbabylon.pygmentize:main'
+        ]
+    }
 )
