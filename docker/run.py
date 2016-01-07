@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 import click
 
@@ -24,8 +25,11 @@ def shell(user):
 @run.command()
 def generate():
     PYTHON_COMMAND = getvar('PYTHON_COMMAND')
+    print('generating...')
+    t0 = time.time()
     subprocess.call([PYTHON_COMMAND, '/pygments-lexer-babylon/test/runner.py'])
-
+    t1 = time.time()
+    print('ellapsed time: %s' % (t1 - t0,))
 
 if __name__ == '__main__':
     run()
