@@ -24,7 +24,7 @@ setup(
     author='Richard Bann',
     author_email='richard.bann@vertis.com',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Plugins',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 2',
