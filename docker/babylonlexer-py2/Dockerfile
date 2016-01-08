@@ -8,3 +8,5 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python-pip
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+
+RUN pip install pygments
