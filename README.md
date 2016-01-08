@@ -52,20 +52,18 @@ except ValueError:
     except ValueError:
         lexer = get_lexer_by_name('text')
 ```
-What you can do in this case is "register" our lexers, so `Pygments` will know that if it
-gets a `lang` like `js` or `jsx`, the lexer to return is our `BabylonLexer`. (Same for `html`)
-Put the following somewhere in your code (before using `Pygments`):
-```python
-from pygmentslexerbabylon import register
-register()
-```
+In this case use language name `jsx` for javascript files and `htmlx` for
+html files.
 
-If you use the `pygmentize` command, be very careful: this package overwrites
-the original script and uses the new lexers. If you do not like this behavior,
-send an issue and we can figure out a better way.
+If you use the `pygmentize` all the above works:
+```sh
+$ pygmentize -l jsx myreact.js  # Note the extension is not jsx
+$ pygmentize myreact.jsx
+$ pygmentize -l htmlx htmlwithjsx.html
+$ pygmentize htmlwithjsx.htmlx
+```
 
 ## Gotchas
 - It is a bit slower than `Pygments`...
 - May fail for really large files (0.5 MB worked for me though)
 - Produces slightly different result than the original `Pygments` lexer
-- Overwrites the `pygmentize` command

@@ -114,6 +114,8 @@ def gettokentype(text, tokens, i):
 
 class BabylonLexer(Lexer):
     name = 'Babylon'
+    aliases = ['jsx']
+    filenames = ['*.jsx']
 
     def get_tokens_unprocessed(self, text):
         # inp = bytes(text, encoding='utf-8')
@@ -160,7 +162,10 @@ class BabylonLexer(Lexer):
 
 
 class BabylonHtmlLexer(HtmlLexer):
-    name = 'BabylonHTML'
+    name = 'Babylon HTML'
+    aliases = ['htmlx']
+    filenames = ['*.htmlx']
+
     tokens = {
         'script-content': [
             (r'(<)(\s*)(/)(\s*)(script)(\s*)(>)',

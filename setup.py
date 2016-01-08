@@ -37,9 +37,9 @@ setup(
     package_data={'pygmentslexerbabylon': files()},
     license='MIT',
     packages=['pygmentslexerbabylon'],
-    entry_points={
-        'console_scripts': [
-            'pygmentize=pygmentslexerbabylon.pygmentize:main'
-        ]
-    }
+    entry_points="""
+        [pygments.lexers]
+        jsx=pygmentslexerbabylon:BabylonLexer
+        htmlx=pygmentslexerbabylon:BabylonHtmlLexer
+    """
 )
