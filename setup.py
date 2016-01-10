@@ -41,5 +41,6 @@ setup(
         [pygments.lexers]
         jsx=pygmentslexerbabylon:BabylonLexer
         htmlx=pygmentslexerbabylon:BabylonHtmlLexer
+        jsre=pygmentslexerbabylon.jsregex:JSRegexLexer
     """
 )
