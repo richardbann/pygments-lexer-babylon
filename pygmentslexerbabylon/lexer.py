@@ -11,7 +11,8 @@ from pygments.token import (Text, Comment, String, Keyword, Name,
 
 
 JSFILE = os.path.join(os.path.dirname(__file__), 'runbabylon.js')
-CMD = ['nodejs', JSFILE]
+NODECMD = os.environ.get('PYGMENTS_NODE_COMMAND', 'nodejs')
+CMD = [NODECMD, JSFILE]
 
 RESERVED_WORDS = (
     'break', 'case', 'catch', 'continue', 'debugger', 'default', 'do', 'else',
@@ -121,11 +122,17 @@ class BabylonLexer(Lexer):
         # inp = bytes(text, encoding='utf-8')
         inp = text.encode('utf-8')
 
-        # out = check_output(CMD, input=inp, stderr=STDOUT)
-        sp = subprocess.Popen(CMD,
-                              stdin=subprocess.PIPE,
-                              stdout=subprocess.PIPE,
-                              stderr=subprocess.PIPE)
+        try:
+            sp = subprocess.Popen(CMD,
+                                  stdin=subprocess.PIPE,
+                                  stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE)
+        except OSError:
+            raise OSError(
+                'Node.js could not run. Make sure it is '
+                'installed and is available as command `%s`. '
+                '(You may need to set the `PYGMENTS_NODE_COMMAND` '
+                'environment variable to run Node.)' % NODECMD)
 
         out, err = sp.communicate(inp)
         if err:

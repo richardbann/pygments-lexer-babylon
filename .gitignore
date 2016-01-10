@@ -2,4 +2,4 @@
 __pycache__
 dist
 *.egg-info
-*_output.html
+**/outputfiles/*.html

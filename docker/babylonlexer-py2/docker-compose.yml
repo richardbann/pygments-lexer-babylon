@@ -9,3 +9,4 @@ babylonlexer:
         PYTHONUNBUFFERED: 1
         PIP_COMMAND: pip
         PYTHON_COMMAND: python
+        PYGMENTS_NODE_COMMAND: node

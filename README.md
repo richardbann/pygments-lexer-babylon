@@ -3,7 +3,9 @@ A javascript lexer for Pygments that uses the babylon parser
 
 
 ## WARNING!
-`Node.js` must be installed to use this package and must be available as `nodejs`. If the following command works,
+`Node.js` must be installed to use this package.
+Set the environment variable `PYGMENTS_NODE_COMMAND` to the command
+you use to run Node. The default is `nodejs`. If the following command works,
 you are most probably OK:
 ```
 nodejs -v
