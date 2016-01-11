@@ -84,20 +84,25 @@
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Hello React!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;build/react.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;build/react-dom.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=ISO-8859-1&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Script-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+      <span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/</span><span class="p">;</span>
+      <span class="kd">function</span> <span class="nx">testInfo</span><span class="p">(</span><span class="nx">phoneInput</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">OK</span> <span class="o">=</span> <span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">phoneInput</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">OK</span><span class="p">)</span>
+          <span class="nb">window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">phoneInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s">&quot; isn&#39;t a phone number with area code!&quot;</span><span class="p">);</span>
+        <span class="k">else</span>
+          <span class="nb">window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s">&quot;Thanks, your phone number is &quot;</span> <span class="o">+</span> <span class="nx">OK</span><span class="p">[</span><span class="m">0</span><span class="p">]);</span>
+      <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;example&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/babel&quot;</span><span class="p">&gt;</span>
-      <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
-        <span class="nt">&lt;h1&gt;</span>Hello, world!<span class="nt">&lt;/h1&gt;</span><span class="p">,</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s">&#39;example&#39;</span><span class="p">)</span>
-      <span class="p">);</span>
-    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Enter your phone number (with area code) and then click &quot;Check&quot;.
+        <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>The expected format is like ###-###-####.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;phone&quot;</span><span class="p">&gt;&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;testInfo(document.getElementById(&#39;phone&#39;));&quot;</span><span class="p">&gt;</span>Check<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>

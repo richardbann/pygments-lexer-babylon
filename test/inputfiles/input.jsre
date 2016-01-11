@@ -5,3 +5,4 @@ regex
 /abc\//
 /start\*\./
 /str\t\r\nother\x11xxx\uabcdxxx\\uabcdxbbb\u{a04f}xx\u{a04g}/
+/(.*?)a(?!(a+)b\2c)\2(.*)/
