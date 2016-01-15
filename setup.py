@@ -19,7 +19,7 @@ def files():
 setup(
     name='pygments-lexer-babylon',
     description='A javascript lexer for Pygments that uses the babylon parser',
-    version='0.10.0',
+    version='0.11.0',
     url='https://github.com/rbann/pygments-lexer-babylon',
     author='Richard Bann',
     author_email='richard.bann@vertis.com',
