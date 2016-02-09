@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/javascript">
       var re = /(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/;
       function testInfo(phoneInput){
