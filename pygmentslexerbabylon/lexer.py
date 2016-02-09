@@ -75,10 +75,10 @@ def gettokentype(text, tokens, i):
 
     # jsx
     elif ttype in ('jsxTagStart', 'jsxTagEnd'):
-        return Name.Tag
+        return Punctuation
     elif ttype == '/' and any([prevtype == 'jsxTagStart',
                                nexttype == 'jsxTagEnd']):
-        return Name.Tag
+        return Punctuation
     elif ttype == 'jsxName' and any([prevtype == 'jsxTagStart',
                                      nexttype == 'jsxTagEnd']):
         return Name.Tag
