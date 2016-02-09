@@ -6,4 +6,4 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python-pip
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
 
-RUN pip install pygments
+RUN pip install pygments==2.1
