@@ -4,7 +4,7 @@ set -e
 
 dir="$(dirname "$BASH_SOURCE")"
 
-for name in babylonlexer-py2 babylonlexer-py3 babylonlexer-node10
+for name in babylonlexer-py3 babylonlexer-py2 babylonlexer-node10
 do
     out="rbann/${name}"
     outlen=${#out}

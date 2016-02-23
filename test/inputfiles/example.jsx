@@ -4,6 +4,13 @@ var x = 1234567;
 
 c1 = <Component prop={123} othercomp=<Other/> val={x}/>
 
+/* this is a block comment */
+s = 'simple string';
+
+function fn(x) {
+  return x;
+}
+
 c2 =
 <div>
   Some text with {x}

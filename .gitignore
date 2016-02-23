@@ -3,3 +3,6 @@ __pycache__
 dist
 *.egg-info
 **/outputfiles/*.html
+.cache
+.coverage
+coverage_html_report

@@ -10,10 +10,6 @@ from pygments.token import (Text, Comment, String, Keyword, Name,
                             Number, Punctuation, Error, Operator)
 
 
-JSFILE = os.path.join(os.path.dirname(__file__), 'runbabylon.js')
-NODECMD = os.environ.get('PYGMENTS_NODE_COMMAND', 'nodejs')
-CMD = [NODECMD, JSFILE]
-
 RESERVED_WORDS = (
     'break', 'case', 'catch', 'continue', 'debugger', 'default', 'do', 'else',
     'finally', 'for', 'if', 'return', 'switch', 'throw', 'try',
@@ -47,6 +43,12 @@ BUILTIN_NAMES = (
     'isFinite', 'isNaN', 'isSafeInteger', 'parseFloat', 'parseInt', 'document',
     'window'
 )
+
+
+def get_node_cmd():
+    jsfile = os.path.join(os.path.dirname(__file__), 'runbabylon.js')
+    nodecmd = os.environ.get('PYGMENTS_NODE_COMMAND', 'nodejs')
+    return [nodecmd, jsfile]
 
 
 def gettokentype(text, tokens, i):
@@ -122,8 +124,9 @@ class BabylonLexer(Lexer):
         # inp = bytes(text, encoding='utf-8')
         inp = text.encode('utf-8')
 
+        nodecmd = get_node_cmd()
         try:
-            sp = subprocess.Popen(CMD,
+            sp = subprocess.Popen(nodecmd,
                                   stdin=subprocess.PIPE,
                                   stdout=subprocess.PIPE,
                                   stderr=subprocess.PIPE)
@@ -132,7 +135,7 @@ class BabylonLexer(Lexer):
                 'Node.js could not run. Make sure it is '
                 'installed and is available as command `%s`. '
                 '(You may need to set the `PYGMENTS_NODE_COMMAND` '
-                'environment variable to run Node.)' % NODECMD)
+                'environment variable to run Node.)' % nodecmd[0])
 
         out, err = sp.communicate(inp)
         if err:

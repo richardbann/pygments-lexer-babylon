@@ -1,0 +1,40 @@
+babylonlexer-py3:
+    hostname: babylonlexer-py3
+    image: rbann/babylonlexer-py3
+    command: test
+    volumes:
+        - "./run.py:/opt/config/run.py"
+        - "..:/pygments-lexer-babylon"
+    environment:
+        PYTHONUNBUFFERED: 1
+        PYTHONPATH: /pygments-lexer-babylon
+        PYTHON_COMMAND: python3
+        PYGMENTS_NODE_COMMAND: nodejs
+
+
+babylonlexer-py2:
+    hostname: babylonlexer-py2
+    image: rbann/babylonlexer-py2
+    command: test
+    volumes:
+        - "./run.py:/opt/config/run.py"
+        - "..:/pygments-lexer-babylon"
+    environment:
+        PYTHONUNBUFFERED: 1
+        PYTHONPATH: /pygments-lexer-babylon
+        PYTHON_COMMAND: python
+        PYGMENTS_NODE_COMMAND: nodejs
+
+
+babylonlexer-node10:
+    hostname: babylonlexer-node10
+    image: rbann/babylonlexer-node10
+    command: test
+    volumes:
+        - "./run.py:/opt/config/run.py"
+        - "..:/pygments-lexer-babylon"
+    environment:
+        PYTHONUNBUFFERED: 1
+        PYTHONPATH: /pygments-lexer-babylon
+        PYTHON_COMMAND: python
+        PYGMENTS_NODE_COMMAND: nodejs
