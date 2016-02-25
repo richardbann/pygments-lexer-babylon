@@ -21,7 +21,7 @@ Nothing too much here, apart from the `Node.js` dependency:
 ```
 pip install pygments-lexer-babylon
 ```
-This will install `Pygments` for you (>=2.0), so if something depends on an older version, `virtualenv` is recommended.
+This will install `Pygments` for you (>=2.1), so if something depends on an older version, `virtualenv` is recommended.
 (Or use `docker`...)
 
 ## Usage

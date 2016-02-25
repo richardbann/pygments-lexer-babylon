@@ -14,6 +14,8 @@ ret=$(($ret + $?))
 docker-compose -f ${dir}/docker/test-compose.yml run --rm babylonlexer-node10 test
 ret=$(($ret + $?))
 
-echo $ret
+if [($ret)] then
+    exit 1
+fi;
 
 docker-compose -f ${dir}/docker/test-compose.yml run --rm babylonlexer-py3 covreport
